@@ -4,7 +4,7 @@ class Stationary:
 
     # @staticmethod - будет ли правильно поставить staticmethod
     def draw(self):
-        print('Запуск отрисовки')
+        print('Запуск отрисовки')  # зачем в родительском классе прописывать этот метод?
 
 
 class Pen(Stationary):
