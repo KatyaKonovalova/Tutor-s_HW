@@ -14,22 +14,22 @@ class Coat(Clothes):
     def __init__(self, title, size):
         # надо ли повторять в классе наследнике поле 'title' (если есть другие поля, то не надо?)
         super().__init__(title)
-        self.size = size
+        self._size = size
 
     def fabric(self):
-        coat_fabric = round(self.size / 6.5 + 0.5, 1)
-        return f'для {self} в размере {self.size} расход ткани составит {coat_fabric}'
+        coat_fabric = round(self._size / 6.5 + 0.5, 1)
+        return f'для {self} в размере {self._size} расход ткани составит {coat_fabric}'
 
-    # @property
-    # def size(self):
-    #     return self.size
-    #
-    # @size.setter
-    # def size(self, size):
-    #     if size >= 1:
-    #         self.size = size
-    #     else:
-    #         raise ValueError('size must be greater than 0')
+    @property
+    def size(self):
+        return self._size
+
+    @size.setter
+    def size(self, size):
+        if size >= 1:
+            self._size = size
+        else:
+            raise ValueError('size must be greater than 0')  # Бросаем ошибку
     """"не работает. не понимаю по какой причине. В целом не могу понять
     для чего использовать @property, если не для замены значения поля с защищенным доступом"""
 
@@ -46,6 +46,13 @@ class Suit(Clothes):
 
 coat1 = Coat('пальто', 2)
 print(coat1.fabric())
+
+print(coat1.size)
+try:  # Отлавливаем ошибку
+    coat1.size = 3
+    print(coat1.size)
+except ValueError:
+    print('Вышла ошибка, но мы ее отработали')
 
 suit1 = Suit('костюм', 2)
 print(suit1.fabric())
