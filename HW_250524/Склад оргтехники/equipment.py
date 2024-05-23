@@ -2,12 +2,25 @@ from abc import ABC, abstractmethod
 
 
 class Equipment(ABC):
+    # list_of_equipment = []
+    dict_equipment = {}
+
     def __init__(self, title, version, price, amount_in_stock):
         self.__title = title
         self.__version = version
         self.__price = price  # как понять, какой режим доступа выбрать private или protected?
         self.__amount_in_stock = amount_in_stock
         self.amount_check(amount_in_stock)
+        # self.dict_equipment = {}
+
+    def new_equipment(self, title, amount_in_stock):
+        # а если мне нужно всю информацию о товаре занести? А в каждом классе разные поля color/speed/quality
+        self.dict_equipment[title] = amount_in_stock
+        # Equipment.list_of_equipment.append(self.dict_equipment)
+        return self.dict_equipment  # почему нет разницы между self.list_of_equipment и Equipment.list_of_equipment?
+
+    # Почему при записи return self.list_of_equipment.append((title, amount_in_stock))
+    # возвращается None?
 
     @property
     def title(self):
@@ -68,17 +81,19 @@ class Xerox(Equipment):
         return self.__quality
 
 
-if __name__ == '__main__':
-    printer1 = Printer('Sony', '111', 10000, '', 'color')
-    print(printer1.amount_in_stock)
+# if __name__ == '__main__':
 
-    try:  # программа падает, хотя, сделала так, как было на уроке(
-        printer1.amount_in_stock = 2
-        print(printer1.amount_in_stock)
-    except TypeError:
-        print('Неверный формат номера телефона')
-    except ValueError:
-        print('Количество не может быть 0 или меньше')
+    # printer1 = Printer('Sony', '111', 10000, 1, 'color')
+    # print(printer1.new_equipment(printer1.title, printer1.amount_in_stock))
+    #
+    # try:  # программа падает, если значение amount_in_stock ввожу неверно, хотя, сделала так, как было на уроке(
+    #     printer1.amount_in_stock = 2
+    #     print(printer1.amount_in_stock)
+    # except TypeError:
+    #     print('Неверный формат номера телефона')
+    # except ValueError:
+    #     print('Количество не может быть 0 или меньше')
+    #
+    # scaner1 = Scaner('Epson', '222', 20000, 10, 2000)
+    # print(scaner1.new_equipment(scaner1.title, scaner1.amount_in_stock))
 
-    printer2 = Printer('Sony', '222', 20000, 10, 'white and black')
-    print(printer2.color)
