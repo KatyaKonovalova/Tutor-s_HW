@@ -56,10 +56,14 @@ class Stock:
             print(f'Товар {item_eq} имеется на складе в количестве {dict_of_equipment.get(item_eq)} шт.')
             amount = int(input('\nСколько данного товара требуется? '))
 
+            # Не получается пройти валидацию на соответствие типа данных
+            # Все что вводится пользователем - str
+            # В дальнейшем надо чтобы amount было int
+
+            if not isinstance(amount, int):
+                raise TypeError('Неверный формат. Должно быть число.')
             if amount <= 0:
                 raise ValueError('Запрашиваемое количество должно быть больше 0')
-            if not isinstance(amount, int):
-                raise KeyError('Неверный формат. Должно быть число.')
 
             if amount <= dict_of_equipment.get(item_eq):
                 print('Можно предоставить требуемое количество')
@@ -83,23 +87,6 @@ class Stock:
             print('Такого товара нет на складе')
 
 
-
-
-if __name__ == '__main__':
-    stock1 = Stock('Временного хранения', '5000 кв.м.', 'Закрытый')
-    print(stock1.tipe)
-
-    print(Stock.get_new_equipment())
-
-#  Я решила перенести метод new_equipment из файла equipment в файл stock
-# потому что посчитала, что методу, который добавляет новый созданный объект в список, логичнее находится в файле stock.
-# Почему тогда строка print(printer1.new_equipment(printer1.title, printer1.amount_in_stock)) подчеркивается и выводит
-# Unresolved attribute reference 'new_equipment' for class 'Printer'
-# Разве с объектами классов находящихся в одном файле нельзя использовать методы находящиеся в другом файле?
-
-
-# printer1 = equipment.Printer('Sony', '111', 10000, 1, 'color')
-# print(printer1.new_equipment(printer1.title, printer1.amount_in_stock))
-#
-# scaner1 = equipment.Scaner('Epson', '222', 20000, 10, 2000)
-# print(scaner1.new_equipment(scaner1.title, scaner1.amount_in_stock))
+# if __name__ == '__main__':
+#     stock1 = Stock('Временного хранения', '5000 кв.м.', 'Закрытый')
+#     print(stock1.tipe)
