@@ -1,8 +1,4 @@
 from equipment import Equipment
-from equipment import Printer
-from equipment import Scaner
-from equipment import Xerox  # как ниже вызвать класс, чтобы не импортировать каждый из файла equipment
-                             # запись Equipment.Printer не прошла - unresolved references
 
 
 class Stock:
@@ -43,15 +39,7 @@ class Stock:
     def send_into_stock():
         dict_of_equipment = Stock.get_new_equipment()
         item_eq = (input('Что хотите отправить на предприятие? ')).title()
-        # for elem in list_of_equipment:
-        #     print(elem)
-        #     if item_eq in elem:
-        #         print(f'Товар {item_eq} имеется на складе в количестве {elem.get(item_eq)} шт.')
-        #
-        #     if int(amount) <= elem.get(item_eq):
-        #         print('Можно предоставить требуемое количество')
-        #     else:
-        #         print(f'Можно предоставить {elem.get(item_eq)}')
+
         if dict_of_equipment.get(item_eq):
             print(f'Товар {item_eq} имеется на складе в количестве {dict_of_equipment.get(item_eq)} шт.')
             amount = int(input('\nСколько данного товара требуется? '))
@@ -59,6 +47,7 @@ class Stock:
             # Не получается пройти валидацию на соответствие типа данных
             # Все что вводится пользователем - str
             # В дальнейшем надо чтобы amount было int
+            # И одно исключает другое, есть пишу amount = int(...) или оставляю amount = input(...)
 
             if not isinstance(amount, int):
                 raise TypeError('Неверный формат. Должно быть число.')
