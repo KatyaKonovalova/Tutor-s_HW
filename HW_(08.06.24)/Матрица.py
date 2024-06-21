@@ -30,6 +30,20 @@ class Matrix:
 
         return result
 
+    # def count(self, other):
+    #
+    #     m = len(self.matrix)  # a: m × n
+    #     n = len(other.matrix)  # d: n × k
+    #     k = len(other.matrix[0])
+    #
+    #     result = [[None for __ in range(k)] for __ in range(m)]  # c: m × k
+    #
+    #     for i in range(m):
+    #         for j in range(k):
+    #             result[i][j] = sum(self.matrix[i][kk] * other.matrix[kk][j] for kk in range(n))
+    #
+    #     return result
+
     def __str__(self):
         result = '['
         for line in self.matrix:
@@ -46,5 +60,6 @@ c = Matrix([[1, 2, 3],
 
 print(a * b)
 print(a @ c)
+# print(a.count(c))
 
 
